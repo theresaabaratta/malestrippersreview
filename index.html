@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Male Entertainer & Burlesque Review</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --gold: #c9a84c;
+  --gold-light: #e0c060;
+  --bg: #0e0f14;
+  --bg2: #13151c;
+  --bg3: #1a1d27;
+  --bg4: #252836;
+  --text: #e8e2d4;
+  --text2: #b0aaa0;
+  --muted: #7a7a8a;
+  --card2: #16181f;
+  --border: rgba(255,255,255,0.07);
+}
+body { background: var(--bg); color: var(--text); font-family: 'Barlow', sans-serif; }
+/* NAV */
+.navbar { background: rgba(14,15,20,0.96) !important; backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+.navbar-brand { font-family: 'Bebas Neue', sans-serif; font-size: 1.25rem; letter-spacing: 0.1em; color: var(--text) !important; }
+.navbar-brand em { color: var(--gold); font-style: normal; }
+.nav-link { font-family: 'Barlow Condensed', sans-serif; font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted) !important; }
+.nav-link:hover { color: var(--gold) !important; }
+.btn-nav-cta { font-family: 'Barlow Condensed', sans-serif; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; background: var(--text); color: #e8edf2; border: none; padding: 8px 20px; border-radius: 2px; transition: background 0.2s; }
+.btn-nav-cta:hover { background: var(--gold); color: #fff; }
+
+/* HERO */
+.hero { min-height: 92vh; background: linear-gradient(160deg, #0a0b10 0%, #0e0f14 50%, #111318 100%); display: flex; align-items: center; padding: 6rem 0 4rem; }
+.hero-tag { font-family: 'Barlow Condensed', sans-serif; font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); opacity: 0.85; }
+.hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.8rem, 7vw, 5rem); line-height: 0.95; letter-spacing: 0.04em; color: var(--text); }
+.hero-title em { color: var(--gold); font-style: normal; }
+.hero-sub { font-size: 1rem; color: var(--muted); font-weight: 300; max-width: 420px; }
+.btn-primary-custom { background: var(--text); color: #e8edf2; font-family: 'Barlow Condensed', sans-serif; font-size: 0.82rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 13px 34px; border: none; border-radius: 2px; font-weight: 700; transition: background 0.2s; }
+.btn-primary-custom:hover { background: var(--gold); color: #fff; }
+.btn-ghost-custom { background: transparent; color: var(--text2); font-family: 'Barlow Condensed', sans-serif; font-size: 0.82rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 12px 34px; border: 1.5px solid var(--bg4); border-radius: 2px; transition: all 0.2s; }
+.btn-ghost-custom:hover { border-color: var(--gold); color: var(--gold); }
+.stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: var(--gold); letter-spacing: 0.05em; line-height: 1; }
+.stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); }
+.hero-stats-divider { border-top: 1px solid var(--border); padding-top: 2rem; margin-top: 2.5rem; }
+
+/* BALL ANIMATION */
+.stage-wrap { position: relative; width: 320px; height: 320px; margin: 0 auto; }
+#ballCanvas { display: block; width: 320px; height: 320px; }
+
+/* SECTIONS */
+.section-tag { font-family: 'Barlow Condensed', sans-serif; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); opacity: 0.8; margin-bottom: 0.3rem; }
+.section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.8rem, 4vw, 2.6rem); letter-spacing: 0.04em; color: var(--text); }
+.section-title em { color: var(--gold); font-style: normal; }
+.section-divider { border-top: 1px solid var(--border); margin: 0; }
+
+/* CITY CARDS */
+.city-card { background: var(--card2); border: 1px solid transparent; padding: 1.75rem 1.5rem; cursor: pointer; transition: all 0.22s; height: 100%; }
+.city-card:hover { background: var(--bg3); border-color: rgba(201,168,76,0.25); }
+.city-card.add-card { border: 1.5px dashed var(--bg4); background: var(--bg2); display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 130px; gap: 0.5rem; }
+.city-card.add-card:hover { border-color: var(--gold); background: rgba(201,168,76,0.05); }
+.city-name-label { font-family: 'Bebas Neue', sans-serif; font-size: 1.35rem; letter-spacing: 0.05em; color: var(--text); margin-bottom: 0.2rem; }
+.city-state-label { font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
+.city-count-label { font-size: 0.76rem; color: var(--muted); }
+.add-icon { font-size: 1.4rem; color: var(--muted); opacity: 0.35; }
+.add-label { font-family: 'Barlow Condensed', sans-serif; font-size: 0.76rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+.cities-grid-wrapper { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 1px; background: var(--bg3); border: 1px solid var(--bg3); }
+
+/* PERFORMER CARDS */
+.performer-card { background: var(--card2); border: 1px solid var(--border); border-radius: 3px; overflow: hidden; transition: all 0.22s; cursor: pointer; height: 100%; }
+.performer-card:hover { border-color: rgba(201,168,76,0.35); transform: translateY(-2px); box-shadow: 0 6px 30px rgba(0,0,0,0.4); }
+.performer-img { width: 100%; height: 190px; background: var(--bg2); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+.performer-img-label { position: absolute; bottom: 0; left: 0; right: 0; padding: 0.6rem 1rem; background: linear-gradient(transparent, rgba(14,15,20,0.95)); font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.performer-body { padding: 1.1rem; }
+.performer-name-label { font-family: 'Bebas Neue', sans-serif; font-size: 1.25rem; letter-spacing: 0.05em; color: var(--text); margin-bottom: 0.2rem; }
+.performer-city-label { font-size: 0.76rem; color: var(--muted); margin-bottom: 0.6rem; }
+.add-performer-card { background: var(--bg2); border: 1.5px dashed var(--bg4); display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 300px; gap: 0.6rem; cursor: pointer; transition: all 0.22s; border-radius: 3px; }
+.add-performer-card:hover { border-color: var(--gold); background: rgba(201,168,76,0.04); }
+
+/* REVIEW CARDS */
+.review-card { background: var(--card2); border: 1px solid var(--border); padding: 1.75rem; border-radius: 3px; }
+.review-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--bg2); border: 1px solid var(--bg4); display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 1rem; color: var(--gold); flex-shrink: 0; }
+.reviewer-name { font-weight: 600; font-size: 0.88rem; color: var(--text); }
+.review-date { font-size: 0.73rem; color: var(--muted); }
+.review-performer-tag { font-size: 0.78rem; color: var(--gold); margin-bottom: 0.5rem; }
+.review-text-body { font-size: 0.88rem; color: var(--text2); font-weight: 300; line-height: 1.7; }
+.add-review-card { background: var(--bg2); border: 1.5px dashed var(--bg4); padding: 2rem; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100px; gap: 0.4rem; cursor: pointer; transition: all 0.22s; text-align: center; border-radius: 3px; }
+.add-review-card:hover { border-color: var(--gold); background: rgba(201,168,76,0.04); }
+
+/* FOOTER */
+footer { background: var(--bg2); border-top: 1px solid var(--border); }
+.footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.1em; color: var(--text); }
+.footer-logo em { color: var(--gold); font-style: normal; }
+.footer-link { font-size: 0.76rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.footer-link:hover { color: var(--gold); }
+.footer-copy { font-size: 0.73rem; color: var(--muted); opacity: 0.6; }
+
+/* MODAL OVERRIDES */
+.modal-content { border: 1px solid var(--border); border-radius: 4px; box-shadow: 0 20px 60px rgba(0,0,0,0.12); }
+.modal-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem; letter-spacing: 0.05em; color: var(--gold); }
+.form-label-custom { font-family: 'Barlow Condensed', sans-serif; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+.form-control-custom { background: var(--bg); border: 1px solid var(--bg3); color: var(--text); border-radius: 2px; font-family: 'Barlow', sans-serif; font-size: 0.88rem; }
+.form-control-custom:focus { border-color: rgba(201,168,76,0.5); box-shadow: none; background: var(--bg); color: var(--text); }
+.star-btn { background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--bg4); transition: color 0.15s; padding: 0; }
+.star-btn.active { color: var(--gold); }
+.btn-modal-submit { width: 100%; background: var(--text); color: #e8edf2; font-family: 'Barlow Condensed', sans-serif; font-size: 0.82rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 13px; border: none; border-radius: 2px; font-weight: 700; transition: background 0.2s; }
+.btn-modal-submit:hover { background: var(--gold); }
+.badge-custom { font-family: 'Barlow Condensed', sans-serif; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; background: rgba(201,168,76,0.12); color: var(--gold); border: 1px solid rgba(201,168,76,0.3); padding: 2px 7px; border-radius: 2px; vertical-align: middle; }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-md sticky-top py-0">
+  <div class="container">
+    <a class="navbar-brand py-3" href="#">Male Entertainer <em>&</em> Burlesque <em>|</em> Review</a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto me-4 gap-md-3 align-items-md-center">
+        <li class="nav-item"><a class="nav-link" href="#cities">Cities</a></li>
+        <li class="nav-item"><a class="nav-link" href="#performers">Performers</a></li>
+        <li class="nav-item"><a class="nav-link" href="#reviews">Reviews</a></li>
+      </ul>
+      <button class="btn-nav-cta" onclick="openModal('review')">Write a Review</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="container">
+    <div class="row align-items-center gy-5">
+      <div class="col-md-6 text-center text-md-start order-2 order-md-1">
+        <div class="hero-tag mb-2">The #1 Independent Entertainment Guide</div>
+        <h1 class="hero-title mb-3">Male Entertainer<br/><em>&amp; Burlesque</em><br/>Review</h1>
+        <p class="hero-sub mb-4">Real reviews. Real cities. Real performers. Your uncensored guide to male entertainment and burlesque across America.</p>
+        <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-md-start">
+          <button class="btn-primary-custom" onclick="document.getElementById('cities').scrollIntoView({behavior:'smooth'})">Browse Cities</button>
+          <button class="btn-ghost-custom" onclick="openModal('review')">Submit a Review</button>
+        </div>
+        <div class="hero-stats-divider d-flex gap-5">
+          <div class="stat text-center">
+            <div class="stat-num" id="stat-cities">0</div>
+            <div class="stat-label">Cities</div>
+          </div>
+          <div class="stat text-center">
+            <div class="stat-num" id="stat-performers">0</div>
+            <div class="stat-label">Performers</div>
+          </div>
+          <div class="stat text-center">
+            <div class="stat-num" id="stat-reviews">0</div>
+            <div class="stat-label">Reviews</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 d-flex justify-content-center order-1 order-md-2">
+        <div class="stage-wrap">
+          <canvas id="ballCanvas" width="320" height="320" aria-hidden="true"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CITIES -->
+<section id="cities" class="py-5">
+  <div class="container">
+    <div class="mb-4">
+      <div class="section-tag">Browse by location</div>
+      <div class="section-title">Cities <em>&</em> Markets <span class="badge-custom ms-1">Growing</span></div>
+    </div>
+    <div class="cities-grid-wrapper" id="cities-grid">
+      <div class="city-card add-card" onclick="openModal('city')" style="min-height:130px">
+        <div class="add-icon">+</div>
+        <div class="add-label">Add a City</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider"/>
+
+<!-- PERFORMERS -->
+<section id="performers" class="py-5">
+  <div class="container">
+    <div class="mb-4">
+      <div class="section-tag">Reviewed performers</div>
+      <div class="section-title">Featured <em>Entertainers</em></div>
+    </div>
+    <div class="row g-3" id="performers-grid">
+      <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="add-performer-card" onclick="openModal('performer')">
+          <div class="add-icon" style="font-size:1.8rem;opacity:0.25">+</div>
+          <div class="add-label">Add a Performer</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider"/>
+
+<!-- REVIEWS -->
+<section id="reviews" class="py-5">
+  <div class="container">
+    <div class="mb-4">
+      <div class="section-tag">Community opinions</div>
+      <div class="section-title">Latest <em>Reviews</em></div>
+    </div>
+    <div id="reviews-list" class="d-flex flex-column gap-3">
+      <div class="add-review-card" onclick="openModal('review')">
+        <div style="font-size:1.3rem;opacity:0.2;color:var(--text)">+</div>
+        <div class="add-label">Be the first to write a review</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT STRIP -->
+<section style="background:var(--bg2);border-top:1px solid var(--border);padding:4rem 0;">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-9 text-center">
+        <div class="section-tag mb-2">About This Site</div>
+        <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,3.5vw,2.2rem);letter-spacing:0.04em;color:var(--text);margin-bottom:1.25rem;">
+          Your Guide to <em style="color:var(--gold);font-style:normal;">Male Entertainment</em> Across America
+        </h2>
+        <p style="font-size:1rem;color:var(--text2);font-weight:300;line-height:1.85;max-width:680px;margin:0 auto 1.5rem;">
+          Male Entertainer &amp; Burlesque Review is an independent review, discovery, and information platform dedicated to helping people find top-rated male entertainers and burlesque performers for private events, bachelorette parties, girls' nights, and special occasions. We are not a booking agency — we are a community-driven guide built on honest, firsthand reviews from real audiences.
+        </p>
+        <div class="row g-4 mt-2 text-start">
+          <div class="col-md-4">
+            <div style="padding:1.5rem;background:var(--card2);border:1px solid var(--border);border-radius:3px;height:100%;">
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.06em;color:var(--gold);margin-bottom:0.5rem;">Reviews &amp; Ratings</div>
+              <p style="font-size:0.88rem;color:var(--muted);font-weight:300;line-height:1.7;margin:0;">Real reviews from real audiences. Every rating on this site comes from people who attended shows and private events — no paid placements, no fake stars.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div style="padding:1.5rem;background:var(--card2);border:1px solid var(--border);border-radius:3px;height:100%;">
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.06em;color:var(--gold);margin-bottom:0.5rem;">Discovery by City</div>
+              <p style="font-size:0.88rem;color:var(--muted);font-weight:300;line-height:1.7;margin:0;">Browse entertainers by city and market. Whether you're planning a local event or traveling, find the best performers in your area with ease.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div style="padding:1.5rem;background:var(--card2);border:1px solid var(--border);border-radius:3px;height:100%;">
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.06em;color:var(--gold);margin-bottom:0.5rem;">Entertainment Info</div>
+              <p style="font-size:0.88rem;color:var(--muted);font-weight:300;line-height:1.7;margin:0;">Learn about performer styles, specialties, and event types. From bachelorette parties to burlesque revues, we cover the full spectrum of male entertainment.</p>
+            </div>
+          </div>
+        </div>
+        <p style="font-size:0.82rem;color:var(--muted);font-weight:300;line-height:1.7;margin:2rem auto 0;max-width:580px;opacity:0.75;">
+          This site is intended for adults 18 and older. All performers listed are independent professionals. Male Entertainer &amp; Burlesque Review does not facilitate bookings or represent any entertainer directly.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="py-5">
+  <div class="container text-center">
+    <div class="footer-logo mb-3">Male Entertainer <em>&</em> Burlesque Review</div>
+    <div class="d-flex justify-content-center flex-wrap gap-4 mb-3">
+      <a href="#cities" class="footer-link">Cities</a>
+      <a href="#performers" class="footer-link">Performers</a>
+      <a href="#reviews" class="footer-link">Reviews</a>
+      <a href="#" class="footer-link">Submit</a>
+      <a href="#" class="footer-link">Contact</a>
+    </div>
+    <div class="footer-copy">© 2025 Male Entertainer & Burlesque Review. All rights reserved. · Independent review site · Not a booking agency.</div>
+    <center><div class="footer-copy">Independents we support - <a href="https://charlestonstrippers101.com">Strippers</a></div></center>
+  </div>
+</footer>
+
+<!-- CITY MODAL -->
+<div class="modal fade" id="cityModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content p-2">
+      <div class="modal-header border-0 pb-0">
+        <h5 class="modal-title">Add a City</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label-custom d-block mb-1">City Name</label>
+          <input class="form-control form-control-custom" id="f-city" placeholder="e.g. Charleston"/>
+        </div>
+        <div class="mb-3">
+          <label class="form-label-custom d-block mb-1">State</label>
+          <input class="form-control form-control-custom" id="f-state" placeholder="e.g. SC"/>
+        </div>
+        <button class="btn-modal-submit mt-2" onclick="addCity()">Add City</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PERFORMER MODAL -->
+<div class="modal fade" id="performerModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content p-2">
+      <div class="modal-header border-0 pb-0">
+        <h5 class="modal-title">Add a Performer</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label-custom d-block mb-1">Stage Name</label>
+          <input class="form-control form-control-custom" id="f-pname" placeholder="e.g. Marcus Steel"/>
+        </div>
+        <div class="mb-3">
+          <label class="form-label-custom d-block mb-1">City</label>
+          <select class="form-select form-control-custom" id="f-pcity">
+            <option value="">— select city —</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label-custom d-block mb-1">Type</label>
+          <select class="form-select form-control-custom" id="f-ptype">
+            <option value="Male Entertainer">Male Entertainer</option>
+            <option value="Burlesque">Burlesque</option>
+            <option value="Both">Both</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label-custom d-block mb-1">Specialty / Style</label>
+          <input class="form-control form-control-custom" id="f-pstyle" placeholder="e.g. Bachelorette Parties"/>
+        </div>
+        <button class="btn-modal-submit mt-2" onclick="addPerformer()">Add Performer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- REVIEW MODAL -->
+<div class="modal fade" id="reviewModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content p-2">
+      <div class="modal-header border-0 pb-0">
+        <h5 class="modal-title">Write a Review</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label-custom d-block mb-1">Your Name / Alias</label>
+          <input class="form-control form-control-custom" id="f-rname" placeholder="e.g. Bachelorette Bride"/>
+        </div>
+        <div class="mb-3">
+          <label class="form-label-custom d-block mb-1">Performer</label>
+          <select class="form-select form-control-custom" id="f-rperformer">
+            <option value="">— select performer —</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label-custom d-block mb-1">Rating</label>
+          <div class="d-flex gap-2" id="star-row">
+            <button class="star-btn" data-v="1" onclick="setStars(1)">★</button>
+            <button class="star-btn" data-v="2" onclick="setStars(2)">★</button>
+            <button class="star-btn" data-v="3" onclick="setStars(3)">★</button>
+            <button class="star-btn" data-v="4" onclick="setStars(4)">★</button>
+            <button class="star-btn" data-v="5" onclick="setStars(5)">★</button>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label-custom d-block mb-1">Review</label>
+          <textarea class="form-control form-control-custom" id="f-rtext" rows="4" placeholder="Tell us about your experience..."></textarea>
+        </div>
+        <button class="btn-modal-submit mt-2" onclick="addReview()">Submit Review</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+(function(){
+  const canvas = document.getElementById('ballCanvas');
+  const ctx = canvas.getContext('2d');
+  const W = 320, H = 320, CX = W/2, CY = H/2;
+  canvas.width = W; canvas.height = H;
+
+  const GROW_DURATION = 2800;
+  const EXPLODE_DURATION = 600;
+  const RESET_PAUSE = 400;
+  const MAX_RADIUS = 110;
+
+  const COLORS = [
+    '#fff9c4','#ffe066','#ffb300','#ff6f00',
+    '#ff4444','#ff80ab','#ea80fc','#80d8ff',
+    '#ffffff','#b8960c'
+  ];
+
+  let phase = 'grow';
+  let phaseStart = performance.now();
+  let particles = [];
+
+  function easeInQuart(t){ return t*t*t*t; }
+  function easeOutCubic(t){ return 1 - Math.pow(1-t,3); }
+
+  function spawnParticles(r) {
+    particles = [];
+    const count = 52;
+    for (let i = 0; i < count; i++) {
+      const angle = (Math.PI * 2 / count) * i + (Math.random()-0.5)*0.3;
+      const speed = 2.5 + Math.random() * 5.5;
+      const size = 3 + Math.random() * 7;
+      particles.push({
+        x: CX, y: CY,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        radius: size,
+        color: COLORS[Math.floor(Math.random()*COLORS.length)],
+        alpha: 1,
+        decay: 0.012 + Math.random()*0.018,
+        trail: []
+      });
+    }
+  }
+
+  function drawBallGlow(r, brightness) {
+    // outer glow rings
+    for (let i = 3; i >= 1; i--) {
+      const gr = ctx.createRadialGradient(CX,CY,r*0.5,CX,CY,r*i*0.55);
+      gr.addColorStop(0, `rgba(255,230,80,${0.06*brightness/i})`);
+      gr.addColorStop(1, 'rgba(255,200,0,0)');
+      ctx.beginPath();
+      ctx.arc(CX, CY, r*i*0.55, 0, Math.PI*2);
+      ctx.fillStyle = gr;
+      ctx.fill();
+    }
+
+    // core ball gradient
+    const grad = ctx.createRadialGradient(CX - r*0.28, CY - r*0.28, r*0.05, CX, CY, r);
+    grad.addColorStop(0,   `rgba(255,255,255,${brightness})`);
+    grad.addColorStop(0.25,`rgba(255,245,120,${brightness*0.95})`);
+    grad.addColorStop(0.55,`rgba(255,180,0,${brightness*0.9})`);
+    grad.addColorStop(0.8, `rgba(220,80,0,${brightness*0.8})`);
+    grad.addColorStop(1,   `rgba(160,20,0,${brightness*0.5})`);
+
+    ctx.beginPath();
+    ctx.arc(CX, CY, r, 0, Math.PI*2);
+    ctx.fillStyle = grad;
+    ctx.fill();
+
+    // specular highlight
+    const spec = ctx.createRadialGradient(CX - r*0.3, CY - r*0.3, 0, CX - r*0.25, CY - r*0.25, r*0.45);
+    spec.addColorStop(0, `rgba(255,255,255,${0.7*brightness})`);
+    spec.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.beginPath();
+    ctx.arc(CX, CY, r, 0, Math.PI*2);
+    ctx.fillStyle = spec;
+    ctx.fill();
+  }
+
+  function drawFlash(alpha) {
+    const grad = ctx.createRadialGradient(CX,CY,0,CX,CY,W*0.75);
+    grad.addColorStop(0,`rgba(255,255,220,${alpha})`);
+    grad.addColorStop(0.3,`rgba(255,200,50,${alpha*0.6})`);
+    grad.addColorStop(1,'rgba(255,150,0,0)');
+    ctx.beginPath();
+    ctx.arc(CX,CY,W*0.75,0,Math.PI*2);
+    ctx.fillStyle = grad;
+    ctx.fill();
+  }
+
+  function drawShockRing(progress) {
+    const maxR = W * 0.72;
+    const r = maxR * easeOutCubic(progress);
+    const alpha = (1 - progress) * 0.7;
+    const thickness = 8 * (1 - progress) + 1;
+    ctx.beginPath();
+    ctx.arc(CX,CY,r,0,Math.PI*2);
+    ctx.strokeStyle = `rgba(255,220,80,${alpha})`;
+    ctx.lineWidth = thickness;
+    ctx.stroke();
+
+    // second ring slightly delayed
+    if (progress > 0.1) {
+      const r2 = maxR * easeOutCubic((progress - 0.1) * 1.1);
+      const a2 = (1 - progress) * 0.4;
+      ctx.beginPath();
+      ctx.arc(CX,CY,Math.min(r2, maxR),0,Math.PI*2);
+      ctx.strokeStyle = `rgba(255,255,255,${a2})`;
+      ctx.lineWidth = (thickness * 0.5);
+      ctx.stroke();
+    }
+  }
+
+  function updateParticles() {
+    for (const p of particles) {
+      p.trail.push({x:p.x, y:p.y});
+      if (p.trail.length > 6) p.trail.shift();
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += 0.08;
+      p.vx *= 0.98;
+      p.alpha -= p.decay;
+      p.radius *= 0.97;
+    }
+    particles = particles.filter(p => p.alpha > 0.02);
+  }
+
+  function drawParticles() {
+    for (const p of particles) {
+      // trail
+      for (let i = 0; i < p.trail.length; i++) {
+        const t = p.trail[i];
+        const ta = (i / p.trail.length) * p.alpha * 0.4;
+        const tr = p.radius * (i / p.trail.length) * 0.6;
+        ctx.beginPath();
+        ctx.arc(t.x, t.y, Math.max(tr,0.5), 0, Math.PI*2);
+        ctx.fillStyle = p.color.replace(')',`,${ta})`).replace('rgb','rgba').replace('rgba(','rgba(').replace('#','').trim();
+        // simpler: just use globalAlpha
+        ctx.globalAlpha = ta;
+        ctx.fillStyle = p.color;
+        ctx.fill();
+      }
+      ctx.globalAlpha = p.alpha;
+      const pg = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.radius);
+      pg.addColorStop(0,'white');
+      pg.addColorStop(0.3, p.color);
+      pg.addColorStop(1, p.color.replace(')',',0)').replace('rgb','rgba'));
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, Math.max(p.radius,0.5), 0, Math.PI*2);
+      ctx.fillStyle = pg;
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+  }
+
+  function draw(now) {
+    ctx.clearRect(0, 0, W, H);
+    const elapsed = now - phaseStart;
+
+    if (phase === 'grow') {
+      const t = Math.min(elapsed / GROW_DURATION, 1);
+      const r = 2 + (MAX_RADIUS - 2) * easeInQuart(t);
+      const brightness = 0.5 + 0.5 * easeInQuart(t);
+      // pulsing brightness flicker near end
+      const flicker = t > 0.85 ? 1 + 0.12 * Math.sin(now * 0.04) : 1;
+      drawBallGlow(r, Math.min(brightness * flicker, 1));
+      if (t >= 1) { phase = 'explode'; phaseStart = now; spawnParticles(MAX_RADIUS); }
+
+    } else if (phase === 'explode') {
+      const t = Math.min(elapsed / EXPLODE_DURATION, 1);
+      if (t < 0.15) {
+        drawFlash((0.15 - t) / 0.15 * 0.9);
+      }
+      drawShockRing(t);
+      updateParticles();
+      drawParticles();
+      if (t >= 1 && particles.length === 0) { phase = 'pause'; phaseStart = now; }
+
+    } else if (phase === 'pause') {
+      if (elapsed >= RESET_PAUSE) { phase = 'grow'; phaseStart = now; }
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  requestAnimationFrame(draw);
+})();
+</script>
+<script>
+let cities = [], performers = [], reviews = [], selectedStars = 0;
+let bsCityModal, bsPerformerModal, bsReviewModal;
+
+document.addEventListener('DOMContentLoaded', () => {
+  bsCityModal = new bootstrap.Modal(document.getElementById('cityModal'));
+  bsPerformerModal = new bootstrap.Modal(document.getElementById('performerModal'));
+  bsReviewModal = new bootstrap.Modal(document.getElementById('reviewModal'));
+});
+
+function openModal(type) {
+  selectedStars = 0;
+  document.querySelectorAll('.star-btn').forEach(b => b.classList.remove('active'));
+  if (type === 'city') bsCityModal.show();
+  else if (type === 'performer') {
+    refreshCitySelect('f-pcity');
+    bsPerformerModal.show();
+  } else {
+    refreshPerformerSelect('f-rperformer');
+    bsReviewModal.show();
+  }
+}
+
+function refreshCitySelect(id) {
+  const sel = document.getElementById(id);
+  sel.innerHTML = '<option value="">— select city —</option>' +
+    cities.map(c => `<option value="${c.name}">${c.name}, ${c.state}</option>`).join('');
+}
+
+function refreshPerformerSelect(id) {
+  const sel = document.getElementById(id);
+  sel.innerHTML = '<option value="">— select performer —</option>' +
+    performers.map(p => `<option value="${p.name}">${p.name} (${p.city})</option>`).join('');
+}
+
+function setStars(n) {
+  selectedStars = n;
+  document.querySelectorAll('.star-btn').forEach(b => b.classList.toggle('active', parseInt(b.dataset.v) <= n));
+}
+
+function addCity() {
+  const name = document.getElementById('f-city').value.trim();
+  const state = document.getElementById('f-state').value.trim();
+  if (!name || !state) return alert('Please fill in both fields.');
+  cities.push({ name, state, count: 0 });
+  document.getElementById('f-city').value = '';
+  document.getElementById('f-state').value = '';
+  renderCities(); updateStats(); bsCityModal.hide();
+}
+
+function addPerformer() {
+  const name = document.getElementById('f-pname').value.trim();
+  const city = document.getElementById('f-pcity').value;
+  const type = document.getElementById('f-ptype').value;
+  const style = document.getElementById('f-pstyle').value.trim();
+  if (!name || !city) return alert('Name and city are required.');
+  performers.push({ name, city, type, style, stars: 0, reviewCount: 0 });
+  renderPerformers(); updateStats(); bsPerformerModal.hide();
+}
+
+function addReview() {
+  const name = document.getElementById('f-rname').value.trim();
+  const performer = document.getElementById('f-rperformer').value;
+  const text = document.getElementById('f-rtext').value.trim();
+  if (!name || !performer || !text || !selectedStars) return alert('Please complete all fields and select a rating.');
+  const now = new Date();
+  reviews.unshift({ name, performer, text, stars: selectedStars, date: now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) });
+  const p = performers.find(x => x.name === performer);
+  if (p) {
+    p.reviewCount++;
+    const all = reviews.filter(r => r.performer === performer);
+    p.stars = Math.round(all.reduce((s, r) => s + r.stars, 0) / all.length * 10) / 10;
+  }
+  renderReviews(); renderPerformers(); updateStats(); bsReviewModal.hide();
+}
+
+function starsHTML(n) {
+  let s = '';
+  for (let i = 1; i <= 5; i++) s += `<span style="color:${i <= Math.round(n) ? 'var(--gold)' : 'var(--bg4)'}">★</span>`;
+  return s;
+}
+
+function miniSVG() {
+  return `<svg width="55" height="110" viewBox="0 0 110 220" aria-hidden="true">
+    <defs>
+      <linearGradient id="ms2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#c4a882"/><stop offset="100%" stop-color="#b8976a"/></linearGradient>
+    </defs>
+    <ellipse cx="55" cy="22" rx="14" ry="17" fill="url(#ms2)"/>
+    <ellipse cx="55" cy="12" rx="12" ry="7" fill="#2a1f12"/>
+    <path d="M36 46 Q30 56 30 76 Q30 96 34 108 Q43 120 55 120 Q67 120 76 108 Q80 96 80 76 Q80 56 74 46 Q65 42 55 42 Q45 42 36 46Z" fill="#2c3450"/>
+    <path d="M34 108 Q36 128 55 132 Q74 128 76 108Z" fill="#1a1f2e"/>
+    <path d="M36 48 Q22 62 16 90" stroke="url(#ms2)" stroke-width="8" fill="none" stroke-linecap="round"/>
+    <path d="M74 48 Q88 62 94 90" stroke="url(#ms2)" stroke-width="8" fill="none" stroke-linecap="round"/>
+    <path d="M38 108 Q34 150 32 185" stroke="#1a1f2e" stroke-width="13" fill="none" stroke-linecap="round"/>
+    <path d="M72 108 Q76 150 78 185" stroke="#1a1f2e" stroke-width="13" fill="none" stroke-linecap="round"/>
+    <path d="M22 187 Q30 194 42 190" stroke="#111" stroke-width="7" fill="none" stroke-linecap="round"/>
+    <path d="M88 187 Q80 194 68 190" stroke="#111" stroke-width="7" fill="none" stroke-linecap="round"/>
+  </svg>`;
+}
+
+function renderCities() {
+  const g = document.getElementById('cities-grid');
+  g.innerHTML = cities.map(c => `
+    <div class="city-card">
+      <div class="city-state-label">${c.state}</div>
+      <div class="city-name-label">${c.name}</div>
+      <div class="city-count-label">${c.count} performer${c.count !== 1 ? 's' : ''}</div>
+    </div>`).join('') + `
+    <div class="city-card add-card" onclick="openModal('city')" style="min-height:130px">
+      <div class="add-icon">+</div><div class="add-label">Add a City</div>
+    </div>`;
+}
+
+function renderPerformers() {
+  const g = document.getElementById('performers-grid');
+  g.innerHTML = performers.map(p => `
+    <div class="col-sm-6 col-md-4 col-lg-3">
+      <div class="performer-card">
+        <div class="performer-img">${miniSVG()}<div class="performer-img-label">${p.type} · Photo coming soon</div></div>
+        <div class="performer-body">
+          <div class="performer-name-label">${p.name}</div>
+          <div class="performer-city-label">${p.city}${p.style ? ' · ' + p.style : ''}</div>
+          <div style="font-size:0.85rem">${p.reviewCount > 0 ? starsHTML(p.stars) + ` <span style="font-size:0.72rem;color:var(--muted)">(${p.reviewCount})</span>` : '<span style="font-size:0.76rem;color:var(--muted)">No reviews yet</span>'}</div>
+        </div>
+      </div>
+    </div>`).join('') + `
+    <div class="col-sm-6 col-md-4 col-lg-3">
+      <div class="add-performer-card" onclick="openModal('performer')">
+        <div class="add-icon" style="font-size:1.8rem;opacity:0.25">+</div>
+        <div class="add-label">Add a Performer</div>
+      </div>
+    </div>`;
+}
+
+function renderReviews() {
+  const l = document.getElementById('reviews-list');
+  if (!reviews.length) {
+    l.innerHTML = `<div class="add-review-card" onclick="openModal('review')"><div style="font-size:1.3rem;opacity:0.2;color:var(--text)">+</div><div class="add-label">Be the first to write a review</div></div>`;
+    return;
+  }
+  l.innerHTML = reviews.map(r => `
+    <div class="review-card">
+      <div class="d-flex gap-3">
+        <div class="review-avatar">${r.name.slice(0, 2).toUpperCase()}</div>
+        <div class="flex-grow-1">
+          <div class="d-flex justify-content-between flex-wrap gap-2 mb-1">
+            <span class="reviewer-name">${r.name}</span>
+            <span class="review-date">${r.date}</span>
+          </div>
+          <div class="review-performer-tag mb-2">Re: ${r.performer} · ${starsHTML(r.stars)}</div>
+          <div class="review-text-body">${r.text}</div>
+        </div>
+      </div>
+    </div>`).join('') + `
+    <div class="add-review-card" onclick="openModal('review')">
+      <div style="font-size:1.1rem;opacity:0.18;color:var(--text)">+</div>
+      <div class="add-label">Add another review</div>
+    </div>`;
+}
+
+function updateStats() {
+  document.getElementById('stat-cities').textContent = cities.length;
+  document.getElementById('stat-performers').textContent = performers.length;
+  document.getElementById('stat-reviews').textContent = reviews.length;
+  cities.forEach(c => { c.count = performers.filter(p => p.city === c.name).length; });
+}
+</script>
+</body>
+</html>

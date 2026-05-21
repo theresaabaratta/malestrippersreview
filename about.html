@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>About — Male Entertainer & Burlesque Review</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --gold: #c9a84c;
+  --gold-light: #e0c060;
+  --bg: #0e0f14;
+  --bg2: #13151c;
+  --bg3: #1a1d27;
+  --bg4: #252836;
+  --text: #e8e2d4;
+  --text2: #b0aaa0;
+  --muted: #7a7a8a;
+  --card2: #16181f;
+  --border: rgba(255,255,255,0.07);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Barlow', sans-serif; font-size: 16px; line-height: 1.6; }
+
+/* NAV */
+.navbar { background: rgba(14,15,20,0.96) !important; backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+.navbar-brand { font-family: 'Bebas Neue', sans-serif; font-size: 1.25rem; letter-spacing: 0.1em; color: var(--text) !important; }
+.navbar-brand em { color: var(--gold); font-style: normal; }
+.nav-link { font-family: 'Barlow Condensed', sans-serif; font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted) !important; transition: color 0.2s; }
+.nav-link:hover, .nav-link.active { color: var(--gold) !important; }
+.btn-nav-cta { font-family: 'Barlow Condensed', sans-serif; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; background: var(--text); color: #0e0f14; border: none; padding: 8px 20px; border-radius: 2px; transition: background 0.2s; }
+.btn-nav-cta:hover { background: var(--gold); color: #fff; }
+
+/* PAGE HERO */
+.page-hero {
+  background: linear-gradient(160deg, #0a0b10 0%, #0e0f14 60%, #111318 100%);
+  padding: 8rem 0 5rem;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+.page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.07) 0%, transparent 65%);
+  pointer-events: none;
+}
+.page-tag { font-family: 'Barlow Condensed', sans-serif; font-size: 0.72rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold); opacity: 0.8; margin-bottom: 0.75rem; }
+.page-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 7vw, 5.5rem); line-height: 0.95; letter-spacing: 0.04em; color: var(--text); }
+.page-title em { color: var(--gold); font-style: normal; }
+.page-sub { font-size: 1.05rem; color: var(--text2); font-weight: 300; line-height: 1.8; max-width: 520px; margin-top: 1.25rem; }
+
+/* GOLD RULE */
+.gold-rule { width: 48px; height: 2px; background: var(--gold); margin: 2rem 0; opacity: 0.7; }
+
+/* SECTION LABEL */
+.s-tag { font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); opacity: 0.75; margin-bottom: 0.5rem; }
+.s-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.6rem, 3.5vw, 2.2rem); letter-spacing: 0.04em; color: var(--text); margin-bottom: 1.25rem; }
+.s-title em { color: var(--gold); font-style: normal; }
+
+/* LEAD TEXT */
+.lead-text { font-size: 1.05rem; color: var(--text2); font-weight: 300; line-height: 1.85; }
+
+/* WHAT WE ARE CARDS */
+.pillar-card {
+  background: var(--card2);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 2rem 1.75rem;
+  height: 100%;
+  position: relative;
+  transition: border-color 0.22s;
+}
+.pillar-card:hover { border-color: rgba(201,168,76,0.28); }
+.pillar-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3.5rem;
+  line-height: 1;
+  color: rgba(201,168,76,0.12);
+  letter-spacing: 0.04em;
+  position: absolute;
+  top: 1.25rem;
+  right: 1.5rem;
+}
+.pillar-icon {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+.pillar-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.25rem;
+  letter-spacing: 0.06em;
+  color: var(--gold);
+  margin-bottom: 0.6rem;
+}
+.pillar-body { font-size: 0.9rem; color: var(--muted); font-weight: 300; line-height: 1.75; }
+
+/* DIVIDER */
+.section-divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+/* PULLQUOTE */
+.pullquote {
+  border-left: 3px solid var(--gold);
+  padding: 1.25rem 1.75rem;
+  background: var(--bg2);
+  border-radius: 0 3px 3px 0;
+}
+.pullquote p {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.25rem;
+  letter-spacing: 0.02em;
+  color: var(--text);
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 0;
+}
+.pullquote span { font-size: 0.78rem; color: var(--muted); margin-top: 0.5rem; display: block; letter-spacing: 0.08em; text-transform: uppercase; }
+
+/* FAQ */
+.faq-item { border-bottom: 1px solid var(--border); padding: 1.5rem 0; }
+.faq-item:last-child { border-bottom: none; }
+.faq-q { font-family: 'Barlow Condensed', sans-serif; font-size: 1.05rem; letter-spacing: 0.04em; color: var(--text); font-weight: 600; margin-bottom: 0.5rem; }
+.faq-a { font-size: 0.9rem; color: var(--muted); font-weight: 300; line-height: 1.75; margin: 0; }
+
+/* CTA STRIP */
+.cta-strip {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 4rem 0;
+  text-align: center;
+}
+.cta-strip h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.8rem, 4vw, 2.8rem); letter-spacing: 0.04em; color: var(--text); margin-bottom: 0.75rem; }
+.cta-strip h2 em { color: var(--gold); font-style: normal; }
+.cta-strip p { font-size: 0.95rem; color: var(--muted); font-weight: 300; max-width: 440px; margin: 0 auto 1.75rem; }
+.btn-gold { font-family: 'Barlow Condensed', sans-serif; font-size: 0.82rem; letter-spacing: 0.15em; text-transform: uppercase; background: var(--gold); color: #0e0f14; border: none; padding: 13px 36px; border-radius: 2px; font-weight: 700; transition: background 0.2s; text-decoration: none; display: inline-block; }
+.btn-gold:hover { background: var(--gold-light); color: #0e0f14; }
+.btn-outline-gold { font-family: 'Barlow Condensed', sans-serif; font-size: 0.82rem; letter-spacing: 0.15em; text-transform: uppercase; background: transparent; color: var(--text2); border: 1.5px solid var(--bg4); padding: 12px 36px; border-radius: 2px; transition: all 0.2s; text-decoration: none; display: inline-block; }
+.btn-outline-gold:hover { border-color: var(--gold); color: var(--gold); }
+
+/* FOOTER */
+footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 3rem 0; }
+.footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.1em; color: var(--text); }
+.footer-logo em { color: var(--gold); font-style: normal; }
+.footer-link { font-size: 0.76rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.footer-link:hover { color: var(--gold); }
+.footer-copy { font-size: 0.73rem; color: var(--muted); opacity: 0.5; }
+
+/* DISCLAIMER BOX */
+.disclaimer {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1.25rem 1.5rem;
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-weight: 300;
+  line-height: 1.7;
+}
+.disclaimer strong { color: var(--text2); font-weight: 500; }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-md sticky-top py-0">
+  <div class="container">
+    <a class="navbar-brand py-3" href="male-entertainer-review.html">Male Entertainer <em>&</em> Burlesque <em>|</em> Review</a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto me-4 gap-md-3 align-items-md-center">
+        <li class="nav-item"><a class="nav-link" href="male-entertainer-review.html#cities">Cities</a></li>
+        <li class="nav-item"><a class="nav-link" href="male-entertainer-review.html#performers">Performers</a></li>
+        <li class="nav-item"><a class="nav-link" href="male-entertainer-review.html#reviews">Reviews</a></li>
+        <li class="nav-item"><a class="nav-link active" href="about.html">About</a></li>
+      </ul>
+      <a class="btn-nav-cta" href="male-entertainer-review.html#reviews">Write a Review</a>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="page-tag">Who we are</div>
+        <h1 class="page-title">About <em>Us</em></h1>
+        <p class="page-sub">We built this site for the audience — the bachelorette crews, the girls' nights, the curious first-timers. A place to find great entertainment, read honest opinions, and know what to expect before you book.</p>
+        <div class="gold-rule"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT IS THIS SITE -->
+<section class="py-5" style="background:var(--bg);">
+  <div class="container">
+    <div class="row align-items-start gy-5">
+      <div class="col-lg-5">
+        <div class="s-tag">What this is</div>
+        <div class="s-title">A Review &amp; <em>Discovery</em> Platform</div>
+        <p class="lead-text mb-4">Male Entertainer &amp; Burlesque Review is an independent guide to male entertainment across America. We cover male revue performers, burlesque artists, and private event entertainers — city by city, review by review.</p>
+        <p class="lead-text">This is not a booking agency. We don't represent performers or take commissions. We're a community-powered resource where real audiences share real experiences so the next person knows exactly what they're getting into.</p>
+      </div>
+      <div class="col-lg-6 offset-lg-1">
+        <div class="pullquote mb-4">
+          <p>"Think of us as Yelp for the stage — but the stage has a lot more personality."</p>
+          <span>— The Editorial Team</span>
+        </div>
+        <div class="row g-3">
+          <div class="col-6">
+            <div style="background:var(--card2);border:1px solid var(--border);border-radius:3px;padding:1.25rem;text-align:center;">
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--gold);line-height:1;">100%</div>
+              <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-top:0.3rem;">Audience Written</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div style="background:var(--card2);border:1px solid var(--border);border-radius:3px;padding:1.25rem;text-align:center;">
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--gold);line-height:1;">0</div>
+              <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-top:0.3rem;">Paid Placements</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div style="background:var(--card2);border:1px solid var(--border);border-radius:3px;padding:1.25rem;text-align:center;">
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--gold);line-height:1;">18+</div>
+              <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-top:0.3rem;">Adults Only</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div style="background:var(--card2);border:1px solid var(--border);border-radius:3px;padding:1.25rem;text-align:center;">
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--gold);line-height:1;">US</div>
+              <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-top:0.3rem;">Nationwide Coverage</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider"/>
+
+<!-- THREE PILLARS -->
+<section class="py-5" style="background:var(--bg);">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="s-tag">What we do</div>
+      <div class="s-title" style="margin-bottom:0;">Three Things, <em>Done Well</em></div>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="pillar-card">
+          <span class="pillar-num">01</span>
+          <span class="pillar-icon">★</span>
+          <div class="pillar-title">Honest Reviews</div>
+          <p class="pillar-body">Every review on this site comes from someone who was actually there. No sponsored content, no performer self-promotion. Just real takes from real audiences — the good, the great, and the occasionally disappointing.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="pillar-card">
+          <span class="pillar-num">02</span>
+          <span class="pillar-icon">◎</span>
+          <div class="pillar-title">Find By City</div>
+          <p class="pillar-body">Entertainment varies wildly by market. We organize everything by city so you can zero in on what's available near you — whether you're in Charleston, Atlanta, Vegas, or anywhere in between.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="pillar-card">
+          <span class="pillar-num">03</span>
+          <span class="pillar-icon">◈</span>
+          <div class="pillar-title">Know Before You Go</div>
+          <p class="pillar-body">Understand the vibe, the format, and what to expect before you commit. Our performer profiles cover style, specialty, and event type so you can match the right entertainer to your occasion.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider"/>
+
+<!-- WHAT KIND OF ENTERTAINMENT -->
+<section class="py-5" style="background:var(--bg);">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="s-tag">The content</div>
+        <div class="s-title">What Kind of <em>Entertainment</em>?</div>
+        <p class="lead-text mb-4">We cover two main categories of male performance — and they're more distinct than people think.</p>
+
+        <div style="border-left:2px solid var(--gold);padding-left:1.5rem;margin-bottom:2rem;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;letter-spacing:0.06em;color:var(--text);margin-bottom:0.4rem;font-weight:600;">Male Entertainers</div>
+          <p style="font-size:0.9rem;color:var(--muted);font-weight:300;line-height:1.75;margin:0;">Private event and party performers who bring high-energy shows directly to bachelorette parties, birthday events, and girls' nights. Think choreographed routines, crowd interaction, and unforgettable moments — all in your venue of choice.</p>
+        </div>
+
+        <div style="border-left:2px solid rgba(201,168,76,0.35);padding-left:1.5rem;margin-bottom:2.5rem;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;letter-spacing:0.06em;color:var(--text);margin-bottom:0.4rem;font-weight:600;">Burlesque Performers</div>
+          <p style="font-size:0.9rem;color:var(--muted);font-weight:300;line-height:1.75;margin:0;">Stage-based artistic performance rooted in theatricality, comedy, and striptease tradition. Male burlesque is a growing art form — equal parts performance and personality. Great for cabaret nights, mixers, and venue shows.</p>
+        </div>
+
+        <p class="lead-text">Both are adult entertainment for consenting adult audiences. Both deserve to be reviewed and talked about openly — which is exactly what this site is for.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider"/>
+
+<!-- FAQ -->
+<section class="py-5" style="background:var(--bg);">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-7">
+        <div class="s-tag">Common questions</div>
+        <div class="s-title">Quick <em>Answers</em></div>
+
+        <div class="faq-item">
+          <div class="faq-q">Can I book a performer through this site?</div>
+          <p class="faq-a">No — we are not a booking platform. We link to and list performer information for discovery purposes only. For bookings, contact the performer directly through their own channels.</p>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Can performers submit their own profiles?</div>
+          <p class="faq-a">Yes. Performers can submit a profile to be listed on the site. Listings are free and editorial — we do not charge for placement and we do not accept payment in exchange for favorable coverage.</p>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Are reviews moderated?</div>
+          <p class="faq-a">Yes. We review submissions for spam, fake reviews, and content that violates our guidelines before publishing. We don't remove negative reviews simply because a performer requests it.</p>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Is this site appropriate for all audiences?</div>
+          <p class="faq-a">This site covers adult entertainment and is intended for audiences 18 and older. Content is informational and editorial — no explicit media is hosted here.</p>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">How do I get my city added?</div>
+          <p class="faq-a">Use the "Add a City" feature on the main site or contact us directly. We're actively expanding coverage and welcome suggestions for new markets.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA STRIP -->
+<section class="cta-strip">
+  <div class="container">
+    <h2>Ready to <em>Explore</em>?</h2>
+    <p>Browse performers by city, read community reviews, or share your own experience with the audience.</p>
+    <div class="d-flex gap-3 justify-content-center flex-wrap">
+      <a href="male-entertainer-review.html#cities" class="btn-gold">Browse Cities</a>
+      <a href="male-entertainer-review.html#reviews" class="btn-outline-gold">Write a Review</a>
+    </div>
+  </div>
+</section>
+
+<!-- DISCLAIMER -->
+<section class="py-4" style="background:var(--bg);">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="disclaimer">
+          <strong>Disclaimer:</strong> Male Entertainer &amp; Burlesque Review is an independent editorial platform. We are not affiliated with, endorsed by, or acting as agents for any performer listed on this site. All reviews represent the personal opinions of their authors. This site is intended for adults aged 18 and older.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container text-center">
+    <div class="footer-logo mb-3">Male Entertainer <em>&</em> Burlesque Review</div>
+    <div class="d-flex justify-content-center flex-wrap gap-4 mb-3">
+      <a href="male-entertainer-review.html#cities" class="footer-link">Cities</a>
+      <a href="male-entertainer-review.html#performers" class="footer-link">Performers</a>
+      <a href="male-entertainer-review.html#reviews" class="footer-link">Reviews</a>
+      <a href="about.html" class="footer-link">About</a>
+      <a href="#" class="footer-link">Contact</a>
+    </div>
+    <div class="footer-copy">© 2025 Male Entertainer & Burlesque Review · Independent review site · Not a booking agency.</div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
